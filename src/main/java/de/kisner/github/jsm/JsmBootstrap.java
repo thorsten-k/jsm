@@ -9,10 +9,10 @@ import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 
-public class Bootstrap
+public class JsmBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(Bootstrap.class);
-	public final static String xmlConfig = "jbefa/config/jbefa.xml";
+	final static Logger logger = LoggerFactory.getLogger(JsmBootstrap.class);
+	public final static String xmlConfig = "jsm/config/jsm.xml";
 	
 	private static Configuration config;
 	
@@ -24,20 +24,19 @@ public class Bootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("jbefa/config");
+		loggerInit.addAltPath("jsm/config");
 		loggerInit.init();
 
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("jbefa","app").getAbsolutePath();
+			String cfn = ExlpCentralConfigPointer.getFile("jsm","app").getAbsolutePath();
 			ConfigLoader.add(cfn);
 			logger.info("Using additional config in: "+cfn );
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
-		ConfigLoader.add(configFile);
 		
+		ConfigLoader.add(configFile);
 		config = ConfigLoader.init();
-
 		return config;
 	}
 }
