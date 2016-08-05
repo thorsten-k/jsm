@@ -19,6 +19,25 @@
 		<maven>3.0</maven>
 	</prerequisites>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.sf.exlp</groupId>
+    			<artifactId>exlp-bom</artifactId>
+    			<version>0.1.12-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+		<dependency> 
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-bom</artifactId>
+			<version>0.2.6-SNAPSHOT</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencyManagement>
+
 	<dependencies>
 	
 		<!-- Utils -->
@@ -29,7 +48,6 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>2.2.11</version>
 		</dependency>
 
 		<!-- HTTP -->
@@ -38,8 +56,6 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.2</version>
 		</dependency>
-		
-
 				
 		<!-- REST -->
 		<dependency>
@@ -172,25 +188,6 @@
 		</plugins>
 	</build>
 	
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>net.sf.exlp</groupId>
-    			<artifactId>exlp-bom</artifactId>
-    			<version>0.1.11-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-		<dependency> 
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-bom</artifactId>
-			<version>0.2.6-SNAPSHOT</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-	</dependencyManagement>
-
   	<repositories>
 		<repository>
 			<id>sonatype.snapshot</id>
