@@ -1,4 +1,4 @@
-package de.kisner.jsm.controller.provider.netatmo;
+package de.kisner.jsm.controller.web.netatmo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
