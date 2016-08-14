@@ -1,4 +1,4 @@
-package de.kisner.github.jsm.controller.provider.netatmo;
+package de.kisner.jsm.controller.provider.netatmo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,10 +23,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.github.jsm.JsmBootstrap;
-import de.kisner.github.jsm.api.rest.NetatmoRest;
-import de.kisner.github.jsm.factory.txt.netatmo.TxtNetatmoTokenFactory;
-import de.kisner.github.jsm.model.json.JsonNetatmoToken;
+import de.kisner.jsm.JsmBootstrap;
+import de.kisner.jsm.api.rest.NetatmoRest;
+import de.kisner.jsm.factory.txt.TxtNetatmoTokenFactory;
+import de.kisner.jsm.model.json.JsonNetatmoToken;
 import net.sf.exlp.util.io.StringUtil;
 
 public class CliNetatmoRest

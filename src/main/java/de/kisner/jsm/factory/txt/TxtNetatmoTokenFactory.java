@@ -1,9 +1,9 @@
-package de.kisner.github.jsm.factory.txt.netatmo;
+package de.kisner.jsm.factory.txt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.kisner.github.jsm.model.json.JsonNetatmoToken;
+import de.kisner.jsm.model.json.JsonNetatmoToken;
 
 public class TxtNetatmoTokenFactory
 {

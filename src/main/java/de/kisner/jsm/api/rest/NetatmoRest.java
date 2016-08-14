@@ -1,4 +1,4 @@
-package de.kisner.github.jsm.api.rest;
+package de.kisner.jsm.api.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import de.kisner.github.jsm.model.json.JsonNetatmoToken;
+import de.kisner.jsm.model.json.JsonNetatmoToken;
 
 @Path("")
 public interface NetatmoRest

@@ -1,4 +1,4 @@
-package de.kisner.github.jsm;
+package de.kisner.jsm;
 
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;

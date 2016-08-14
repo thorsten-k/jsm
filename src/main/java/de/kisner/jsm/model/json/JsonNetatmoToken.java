@@ -1,4 +1,4 @@
-package de.kisner.github.jsm.model.json;
+package de.kisner.jsm.model.json;
 
 import java.io.Serializable;
 import java.util.List;
