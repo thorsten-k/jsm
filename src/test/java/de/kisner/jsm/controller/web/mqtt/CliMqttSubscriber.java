@@ -6,30 +6,27 @@ import org.apache.commons.configuration.Configuration;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.jsm.JsmBootstrap;
-import de.kisner.jsm.controller.web.netatmo.CliNetatmoRest;
+import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class CliMqttSubscriber
 {	
 	final static Logger logger = LoggerFactory.getLogger(CliMqttSubscriber.class);
 	
-	public static final String BROKER_URL = "tcp://broker.mqttdashboard.com:1883";
 	 public static final String TOPIC_TEMPERATURE = "home/temperature";
 	 
     private MqttClient client;
 
-    public CliMqttSubscriber()
+    public CliMqttSubscriber(Configuration config)
     {
     	String clientId = UUID.randomUUID().toString();
          try
          {
         	 logger.info("Creating "+MqttClient.class.getSimpleName());
-        	 client = new MqttClient(BROKER_URL, clientId);
+        	 client = new MqttClient(config.getString(ConfigKey.netMqttUrl), clientId);
               
         	 MqttConnectOptions options = new MqttConnectOptions();
         	 options.setCleanSession(false);
@@ -56,6 +53,6 @@ public class CliMqttSubscriber
 	{
 		Configuration config = JsmBootstrap.init();
 		
-		CliMqttSubscriber cli = new CliMqttSubscriber();
+		CliMqttSubscriber cli = new CliMqttSubscriber(config);
 	}
 }

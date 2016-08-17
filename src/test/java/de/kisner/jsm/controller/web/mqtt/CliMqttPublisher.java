@@ -12,24 +12,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.kisner.jsm.JsmBootstrap;
-import de.kisner.jsm.controller.web.netatmo.CliNetatmoRest;
+import net.sf.exlp.interfaces.util.ConfigKey;
 
 public class CliMqttPublisher
 {	
 	final static Logger logger = LoggerFactory.getLogger(CliMqttPublisher.class);
 	
-	public static final String BROKER_URL = "tcp://broker.mqttdashboard.com:1883";
-	 public static final String TOPIC_TEMPERATURE = "home/temperature";
+	public static final String TOPIC_TEMPERATURE = "home/temperature";
 	 
     private MqttClient client;
 
-    public CliMqttPublisher()
+    public CliMqttPublisher(Configuration config)
     {
     	String clientId = UUID.randomUUID().toString();
          try
          {
         	 logger.info("Creating "+MqttClient.class.getSimpleName());
-        	 client = new MqttClient(BROKER_URL, clientId);
+        	 client = new MqttClient(config.getString(ConfigKey.netMqttUrl), clientId);
               
         	 MqttConnectOptions options = new MqttConnectOptions();
         	 options.setCleanSession(false);
@@ -67,8 +66,7 @@ public class CliMqttPublisher
     public static void main(String[] args) throws Exception
 	{
 		Configuration config = JsmBootstrap.init();
-		
-		CliMqttPublisher cli = new CliMqttPublisher();
+		CliMqttPublisher cli = new CliMqttPublisher(config);
 		cli.send();
 	}
 }

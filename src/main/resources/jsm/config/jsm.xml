@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
+	<net>
+        <mqtt>
+        	 <url>tcp://broker.mqttdashboard.com:1883</url>
+        </mqtt>
+	</net>
 	<file>
         <response>
         	 <stage3>/Volumes/ramdisk/dev/jbefa/stage3.html</stage3>
