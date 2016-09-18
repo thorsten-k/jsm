@@ -16,24 +16,25 @@ public class CliMqttSubscriber
 {	
 	final static Logger logger = LoggerFactory.getLogger(CliMqttSubscriber.class);
 	
-	 public static final String TOPIC_TEMPERATURE = "home/temperature";
+	 public static final String TOPIC_TEMPERATURE1 = "home/temperature";
 	 
     private MqttClient client;
 
     public CliMqttSubscriber(Configuration config)
     {
     	String clientId = UUID.randomUUID().toString();
+    	String mqttUrl = config.getString(ConfigKey.netMqttUrl);
          try
          {
         	 logger.info("Creating "+MqttClient.class.getSimpleName());
-        	 client = new MqttClient(config.getString(ConfigKey.netMqttUrl), clientId);
+        	 client = new MqttClient(mqttUrl, clientId);
               
         	 MqttConnectOptions options = new MqttConnectOptions();
         	 options.setCleanSession(false);
         	 
         	 client.setCallback(new CliMqttCallback());
         	 
-        	 logger.info("Connecting "+MqttClient.class.getSimpleName());
+        	 logger.info("Connecting "+MqttClient.class.getSimpleName()+" to "+mqttUrl);
         	 client.connect();
         	 logger.info("Connected "+MqttClient.class.getSimpleName());
         	 
@@ -49,10 +50,16 @@ public class CliMqttSubscriber
          }
     }
     
+    public void run()
+    {
+    	
+    }
+    
     public static void main(String[] args) throws Exception
 	{
 		Configuration config = JsmBootstrap.init();
 		
 		CliMqttSubscriber cli = new CliMqttSubscriber(config);
+		cli.run();
 	}
 }

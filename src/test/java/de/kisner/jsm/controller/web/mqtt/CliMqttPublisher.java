@@ -21,21 +21,24 @@ public class CliMqttPublisher
 	public static final String TOPIC_TEMPERATURE = "home/temperature";
 	 
     private MqttClient client;
+    private MqttTopic temperatureTopic;
 
-    public CliMqttPublisher(Configuration config)
+	public CliMqttPublisher(Configuration config)
     {
     	String clientId = UUID.randomUUID().toString();
-         try
-         {
-        	 logger.info("Creating "+MqttClient.class.getSimpleName());
-        	 client = new MqttClient(config.getString(ConfigKey.netMqttUrl), clientId);
-              
-        	 MqttConnectOptions options = new MqttConnectOptions();
+    	String mqttUrl = config.getString(ConfigKey.netMqttUrl);
+    	try
+    	{
+    		logger.info("Creating "+MqttClient.class.getSimpleName());
+    		client = new MqttClient(config.getString(ConfigKey.netMqttUrl), clientId);
+    		
+    		MqttConnectOptions options = new MqttConnectOptions();
         	 options.setCleanSession(false);
         	 options.setWill(client.getTopic("home/LWT"),"I'm gone".getBytes(), 2, true);
         	 
-        	 logger.info("Connecting "+MqttClient.class.getSimpleName());
+        	 logger.info("Connecting "+MqttClient.class.getSimpleName()+" to "+mqttUrl);
         	 client.connect(options);
+        	 temperatureTopic = client.getTopic(TOPIC_TEMPERATURE);
         	 logger.info("Connected "+MqttClient.class.getSimpleName());
          }
          catch (MqttException e)
@@ -56,7 +59,6 @@ public class CliMqttPublisher
     
     private void publishTemperature(int i) throws MqttException
     {
-        final MqttTopic temperatureTopic = client.getTopic(TOPIC_TEMPERATURE);
         final String temperature = i + "°C";
         logger.info("Sending to "+temperatureTopic.toString());
         temperatureTopic.publish(new MqttMessage(temperature.getBytes()));
